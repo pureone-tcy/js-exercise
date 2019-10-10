@@ -283,8 +283,38 @@ console.log(`(Allow function callback.)\n   ${pString}`);
  * - AnonymouseClass : クラスを値として定義する
  */
 const MyClass = class MyClass {
+  // 省略可能
   constructor() {}
 };
 const AnonymouseClass = class {
+  // 省略可能
   constructor() {}
 };
+
+class MyClass2 {}
+const myClass2 = new MyClass2();
+const myClass3 = new MyClass2();
+console.log(`(MyClass equal.)\n   ${myClass2 === myClass3}`);
+console.log(`(MyClass instanceof.)\n   ${myClass2 instanceof MyClass2}`);
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+const point = new Point(3, 4);
+console.log(`(constractor)\n   x=${point.x}, y=${point.y}`);
+
+class Counter {
+  constructor() {
+    this.count = 1;
+  }
+  increment() {
+    this.count++;
+  }
+}
+const counterA = new Counter();
+const counterB = new Counter();
+counterA.increment();
+console.log(`(counter)\n   A=${counterA.count}, B=${counterB.count}`);
