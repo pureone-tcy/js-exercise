@@ -19,8 +19,8 @@ console.log(`(Add Properties.)\n   ${JSON.stringify(myCar)}`);
 /**
  * Object to Array.
  * 
- * @param {*} obj 
- * @param {*} array 
+ * @param {Object} obj 
+ * @param {Array} array 
  */
 function objToArray(obj, array) {
   for(var prop in obj) {
@@ -157,3 +157,61 @@ console.log(`(Array#slice.)\n   ${JSON.stringify(colors.slice(1,4))}`);
  */
 const isInclude = colors.some(v => v.color == "blue");
 console.log(`(Array#some.)\n   ${isInclude}`);
+
+/**
+ * Array#push.
+ */
+colors.push({"color": "white"});
+console.log(`(Array#push.)\n   ${JSON.stringify(colors)}`);
+
+/**
+ * Array#pop.
+ */
+const tailColor = colors.pop();
+console.log(`(Array#pop.)\n   pop=${JSON.stringify(tailColor)}, colors=${JSON.stringify(colors)}`);
+
+/**
+ * Array#unshift.
+ */
+colors.unshift({"color": "black"});
+console.log(`(Array#unshift.)\n   ${JSON.stringify(colors)}`);
+
+/**
+ * Array#shift.
+ */
+const headColor = colors.shift();
+console.log(`(Array#shift)\n   shift=${JSON.stringify(headColor)}, colors=${JSON.stringify(colors)}`);
+
+/**
+ * Spread.
+ */
+const newColors = ["sakura", ...colors, "gold"];
+console.log(`(Spread.)\n   ${JSON.stringify(newColors)}`);
+
+/**
+ * Destruction method.
+ * - Array.prototype.pop
+ * - Array.prototype.push
+ * - Array.prototype.splice
+ * - Array.prototype.reverse
+ * - Array.prototype.shift
+ * - Array.prototype.sort
+ * - Array.prototype.unshift
+ * - Array.prototype.copyWithin
+ * - Array.prototype.fill
+ */
+
+/**
+* immutable lib.
+* - immutable-array-prototype
+* - immutable.js
+*/
+
+/**
+ * Array loop method.
+ * - forEach
+ * - map
+ * - fileter
+ * - reduce
+ * args = call-back function
+ */
