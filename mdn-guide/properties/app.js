@@ -54,14 +54,14 @@ console.log(`(Simple function.)\n   ${factrial(4)}`);
 /**
  * Arrow function.
  */
-const array = [1, 2, 3];
-const addOne = array.map(n => n + 1);
+const array1 = [1, 2, 3];
+const addOne = array1.map(n => n + 1);
 console.log(`(Arrow function.)\n   ${addOne}`);
 
 /**
  * call back function.
  */
-const cbFunc = array.forEach( n => {
+const cbFunc = array1.forEach( n => {
   if(n <= 1) console.log(`(Call Back function.)\n   ${n}`);
 });
 
@@ -215,3 +215,76 @@ console.log(`(Spread.)\n   ${JSON.stringify(newColors)}`);
  * - reduce
  * args = call-back function
  */
+const array2 = [1,2,3];
+console.log(`(Array#reduce.)\n   ${array2.reduce((acc, v, ix, arr) => acc + v, 0)}`)
+
+/**
+ * this. NG Pattern.
+ * - function define
+ * - function expression
+ * - method.
+ *   メソッドのみ別オブジェクトへコピーした場合に、参照しているプロパティがないとエラーになる
+ */
+function f1() {
+  return this;
+};
+const fn2 = function () {
+  return this;
+};
+console.log(`(this case 1.)\n   f1()=${f1()}, f2()=${fn2()}`);
+
+const obj4 = {
+  method() {
+    return this;
+  }
+};
+console.log(`(this case 2.)\n   ${JSON.stringify(obj4.method())}`);
+
+const person = {
+  name: "tsuchiya",
+  say: function(arg) {
+    const name2 = this.name + arg
+    return name2;
+  }
+}
+console.log(`(this case 3.)\n   ${person.say("!")}`);
+
+/**
+ * this
+ * - call.
+ * - apply.
+ * - bind.
+ */
+const person1 = {
+  name: "John"
+}
+console.log(`(this call.)\n   ${person.say.call(person1, "!!")}`);
+console.log(`(this apply.)\n   ${person.say.call(person1, ["??"])}`);
+const bindedSay = person.say.bind(person1, "(^^)");
+console.log(`(this bind.)\n   ${bindedSay()}`);
+
+// `Callback Function` has not base Object.
+
+/**
+ * Allow function. callback function.
+ */
+const Prefixer = {
+  prefix: "pre",
+  prefixArray(strings) {
+    return strings.map((str) => this.prefix + "-" + str);
+  }
+}
+const pString = Prefixer.prefixArray(["a", "b", "c"]);
+console.log(`(Allow function callback.)\n   ${pString}`);
+
+/**
+ * class.
+ * - MyClass: クラスを定義する
+ * - AnonymouseClass : クラスを値として定義する
+ */
+const MyClass = class MyClass {
+  constructor() {}
+};
+const AnonymouseClass = class {
+  constructor() {}
+};
