@@ -95,15 +95,6 @@ const { en, ja } = languages;
 console.log(`(Split assignment.)\n   ja=${ja}, en=${en}`);
 
 /**
- * Object to imutable.
- */
-const obj1 = Object.freeze({
-  key: "value"
-});
-const hasKey = obj1.hasOwnProperty("key");
-console.log(`(Object to imutable.)\n   ${hasKey}`);
-
-/**
  * Merge object.
  */
 const objectA = { a: "a" }
@@ -126,6 +117,22 @@ const obj2 = Object.create(Object.prototype);
 console.log(`(Object prototype.)\n   ${obj2.hasOwnProperty === Object.prototype.hasOwnProperty}`);
 
 /**
+ * Object freeze.
+ */
+"use strict";
+const obj3 = Object.freeze({key: "value"});
+// obj1.key = "value2";
+// TypeError: Cannot assign to read only property 'key' of object '#<Object>'
+
+/**
+ * Object Propery isExitst function.
+ * - in
+ * - hasOwnProperty
+ */
+console.log(`(Object Propery Exist Check in.)\n   ${"key" in obj3}`);
+console.log(`(Object Propery Exist Check hasOwnProperty.)\n   ${obj3.hasOwnProperty("key")}`);
+
+/**
  * Array#findIndex.
  */
 const colors = [
@@ -140,6 +147,13 @@ console.log(`(Array#findIndex.)\n   index=${indexOfBlue}, element=${JSON.stringi
 const blue = colors.find(v => v.color == "blue");
 console.log(`   element=${JSON.stringify(blue)}`);
 
+/**
+ * Array#slice.
+ */
+console.log(`(Array#slice.)\n   ${JSON.stringify(colors.slice(1,4))}`);
+
 /***
  * Array#some.
  */
+const isInclude = colors.some(v => v.color == "blue");
+console.log(`(Array#some.)\n   ${isInclude}`);
