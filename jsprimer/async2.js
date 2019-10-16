@@ -20,3 +20,12 @@ async function rejectFn() {
     return Promise.reject(new Error("ERROR"));
 }
 rejectFn().catch(e => console.log(`(Async reject.)\n   ${e.message}`));
+
+/**
+ * Async await.
+ */
+async function doAsync3() {
+    const value = await Promise.resolve(10);
+    console.log(`(Async await.)\n   ${value}`);
+}
+doAsync3();
