@@ -219,10 +219,11 @@ console.log(`(Array#reduce.)\n   ${array2.reduce((acc, v, ix, arr) => acc + v, 0
 
 /**
  * this. NG Pattern.
- * - function define
- * - function expression
- * - method.
- *   メソッドのみ別オブジェクトへコピーした場合に、参照しているプロパティがないとエラーになる
+ * - thisを含むメソッドを変数に代入した場合
+ *   - メソッドは関数を値にもつオブジェクトのプロパティとして定義したもの
+ *   - メソッドとして定義した関数を、ファーストクラス関数として別の変数に代入して呼び出せる
+ *   - この場合、thisは、定義時の値ではなく実行時に値になってしまう
+ *   - ベースオブジェクトがない場合は、undefineのthisを参照してエラーになってしまう
  */
 function f1() {
   return this;
@@ -250,9 +251,10 @@ console.log(`(this case 3.)\n   ${person.say("!")}`);
 
 /**
  * this
- * - call.
- * - apply.
- * - bind.
+ * - 明示的にthisを指定して関数を実行する
+ *   - call.
+ *   - apply.
+ *   - bind.
  */
 const person1 = {
   name: "John"
@@ -266,6 +268,12 @@ console.log(`(this bind.)\n   ${bindedSay()}`);
 
 /**
  * Allow function. callback function.
+ * - 外側のスコープのthisを参照する
+ * - 外側にスコープがない場合、トップレベルのthisを参照する
+ *   - トップレベルのthisは実行コンテキストによって異なる
+ *   - "Script" = グローバルオブジェクト
+ *   - "Module" = undefined
+ * - 以下は外側のスコープPrefixerがthisになる
  */
 const Prefixer = {
   prefix: "pre",
@@ -333,6 +341,7 @@ console.log(`   ${counterA.increment2 === counterB.increment2}`);
 /**
  * Wrapper.
  * - for create class.
+ * - クラスの静的メソッドでのthisはクラス自身を参照するため、new thisに代用できる
  */
 class ArrayWrapper {
   constructor(array = []) {
@@ -534,6 +543,7 @@ Promise
  * - 全て完了するまで待つ
  * Promise#race
  * - Promiseが1つでも完了した時点で、次の処理を実行する
+ * - Promiseインスタンスは1度でもSettledとナルトそれ以降の状態も変化せず、thenのコールバック関数も呼び出さない
  * - タイムアウト処理が実装できる
  *   - タムアウト時の処理をPromiseの最後の配列に渡す
  */
