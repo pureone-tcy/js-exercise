@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Async Function.
  * - 非同期処理の関数定義構文（ES2017）
